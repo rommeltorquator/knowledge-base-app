@@ -41,3 +41,5 @@ group :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
+
+gem 'image_processing', '~> 1.12', '>= 1.12.1'

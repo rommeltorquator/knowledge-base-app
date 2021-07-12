@@ -1,18 +1,21 @@
 class ProceduresController < ApplicationController
-  before_action :set_procedure, only: %i[show edit update destroy]
+  before_action :set_procedure, only: %i[edit update destroy]
 
   def index
-    @procedures = current_user.procedures.all
+    @posts = Procedure.where(team_id: current_user.team.id)
   end
 
-  def show; end
+  def show
+    @procedure = Procedure.find(params[:id])
+  end
 
   def new
-    @procedure = Procedure.new
+    @procedure = current_user.procedures.build
   end
 
   def create
     @procedure = current_user.procedures.build(procedure_params)
+    @procedure.team_id = current_user.team_id
     if @procedure.save
       redirect_to users_procedure_path(@procedure), notice: 'Procedure was successfully created.'
     else

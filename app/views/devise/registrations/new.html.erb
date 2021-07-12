@@ -18,6 +18,16 @@
     <%= f.text_field :last_name, autofocus: true, autocomplete: "first name" %>
   </div>
 
+  <%#= f.select :team_id, @teams { |t| [ t.name, t.id ] } %>
+  <%#= f.collection_select(:team_id, @teams, :id, :name) %>
+  <%#= f.select("team", "team_id", @teams {|t| [ t.name, t.id ] }, { include_blank: true }) %>
+
+  <div class="field">
+    <label>Team</label>
+    <%= f.collection_select :team_id, Team.all, :id, :name, include_blank: true %>
+    <%#= select_tag "Team", options_from_collection_for_select(Team.all, "id", "name", 1) %>
+  </div>
+
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>

@@ -10,13 +10,8 @@
   </head>
 
   <body>
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <%= render 'partials/navbar' %>
+    <%= render 'partials/messages' %>
 
     <div class="container">
       <%= yield %>

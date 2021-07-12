@@ -8,6 +8,10 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+// added by me
+require("trix")
+require("@rails/actiontext")
+
 import "bootstrap"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
