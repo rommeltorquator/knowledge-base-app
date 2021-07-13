@@ -19,6 +19,7 @@ gem 'devise'
 # added by me
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.7'
 gem 'popper_js', '~> 2.9.2'
+gem 'ransack', '~> 2.4', '>= 2.4.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,5 +1,7 @@
 <h1>All Procedures by a team</h1>
 
+<%= render 'search_form.html.erb' %>
+
 <table class="table">
   <thead>
     <tr>
@@ -16,6 +18,7 @@
         <td><%= link_to procedure.title, users_procedure_path(procedure) %></td>
         <td><%= procedure.user.first_name %></td>
         <td><%= procedure.team.name %></td>
+
         <% if member_signed_in? %>
           <% if current_member.id == procedure.user.id %>
             <td><%= link_to 'Edit', edit_users_procedure_path(procedure) %></td>

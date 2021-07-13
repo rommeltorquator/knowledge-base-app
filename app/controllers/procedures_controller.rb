@@ -2,8 +2,12 @@ class ProceduresController < ApplicationController
   before_action :set_procedure, only: %i[edit update destroy]
 
   def index
-    @posts = Procedure.where(team_id: current_member.team.id).order(id: :desc) if member_signed_in?
-    @posts = Procedure.where(team_id: current_admin.team.id).order(id: :desc) if admin_signed_in?
+    @q = Procedure.where(team_id: current_member.team.id).order(id: :desc).ransack(params[:q])
+    # @q = Procedure.ransack(params[:q])
+    @posts = @q.result(distinct: true) # if member_signed_in?
+    # @posts = Procedure.where(team_id: current_admin.team.id).order(id: :desc) if admin_signed_in?
+    # @posts = Procedure.where(team_id: current_member.team.id).order(id: :desc) if member_signed_in?
+    # @posts = Procedure.where(team_id: current_admin.team.id).order(id: :desc) if admin_signed_in?
   end
 
   def show
@@ -11,11 +15,17 @@ class ProceduresController < ApplicationController
   end
 
   def new
-    @procedure = current_member.procedures.build
+    @procedure = current_member.procedures.build if member_signed_in?
+    @procedure = current_admin.procedures.build if admin_signed_in?
   end
 
   def create
-    @procedure = current_member.procedures.build(procedure_params)
+    if member_signed_in?
+      @procedure = current_member.procedures.build(procedure_params)
+    elsif admin_signed_in?
+      @procedure = current_admin.procedures.build(procedure_params)
+    end
+
     @procedure.team_id = current_member.team_id
 
     if @procedure.save
@@ -43,7 +53,8 @@ class ProceduresController < ApplicationController
   private
 
   def set_procedure
-    @procedure = current_member.procedures.find(params[:id])
+    @procedure = current_member.procedures.find(params[:id]) if member_signed_in?
+    @procedure = Procedure.find(params[:id]) if admin_signed_in?
   end
 
   def procedure_params
