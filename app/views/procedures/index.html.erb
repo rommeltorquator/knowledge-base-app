@@ -1,0 +1,47 @@
+<h1>All Procedures by a team</h1>
+
+<%= render 'search_form.html.erb' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Team</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |procedure| %>
+      <tr>
+        <td><%= link_to procedure.title, users_procedure_path(procedure) %></td>
+        <td><%= procedure.user.first_name %></td>
+        <td><%= procedure.team.name %></td>
+
+        <% if member_signed_in? %>
+          <% if current_member.id == procedure.user.id %>
+            <td><%= link_to 'Edit', edit_users_procedure_path(procedure) %></td>
+            <td>
+              <%= link_to 'Delete', users_procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          <% else %>
+            <td></td>
+            <td></td>
+          <% end %>
+        <% end %>
+
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Edit', edit_users_procedure_path(procedure) %></td>
+          <td>
+            <%= link_to 'Delete', users_procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Procedure', new_users_procedure_path %>

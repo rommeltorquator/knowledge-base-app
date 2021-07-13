@@ -8,12 +8,12 @@ default: &default
 
 development: 
   <<: *default
-  database: rails_project_development
+  database: knowledge_based_development
 
 test:
   <<: *default
-  database: rails_project_test
+  database: knowledge_based_test
 
 production:
   <<: *default
-  detabase: rails_project_production
+  detabase: knowledge_based_production

@@ -7,14 +7,19 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'pg'
 gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.4'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-gem 'hamlit-rails'
+
+# added by me
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.7'
+gem 'popper_js', '~> 2.9.2'
+gem 'ransack', '~> 2.4', '>= 2.4.2'
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
