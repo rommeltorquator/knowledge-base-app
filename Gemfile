@@ -14,7 +14,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-# gem 'hamlit-rails'
 
 # added by me
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.7'

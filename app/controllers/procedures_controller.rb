@@ -4,11 +4,8 @@ class ProceduresController < ApplicationController
   def index
     @q = Procedure.where(team_id: current_member.team.id).order(id: :desc).ransack(params[:q]) if member_signed_in?
     @q = Procedure.where(team_id: current_admin.team.id).order(id: :desc).ransack(params[:q]) if admin_signed_in?
-    # @q = Procedure.ransack(params[:q])
 
     @posts = @q.result(distinct: true)
-    # @posts = Procedure.where(team_id: current_member.team.id).order(id: :desc) if member_signed_in?
-    # @posts = Procedure.where(team_id: current_admin.team.id).order(id: :desc) if admin_signed_in?
   end
 
   def show
