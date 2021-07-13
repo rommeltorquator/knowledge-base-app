@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :members
+  
   root 'home#index'
-  devise_for :users
   resource :users do
     resources :procedures
   end

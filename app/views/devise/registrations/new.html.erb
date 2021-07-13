@@ -28,6 +28,11 @@
     <%#= select_tag "Team", options_from_collection_for_select(Team.all, "id", "name", 1) %>
   </div>
 
+  <!-- <div class="field"> -->
+    <%#= f.label :type %>
+    <%#= f.select :type, ["", "Admin", "Member" ], {}, { :class => '' } %>
+  <!-- </div> -->
+
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>

@@ -2,7 +2,8 @@ class ProceduresController < ApplicationController
   before_action :set_procedure, only: %i[edit update destroy]
 
   def index
-    @posts = Procedure.where(team_id: current_user.team.id)
+    @posts = Procedure.where(team_id: current_member.team.id).order(id: :desc) if member_signed_in?
+    @posts = Procedure.where(team_id: current_admin.team.id).order(id: :desc) if admin_signed_in?
   end
 
   def show
@@ -10,12 +11,13 @@ class ProceduresController < ApplicationController
   end
 
   def new
-    @procedure = current_user.procedures.build
+    @procedure = current_member.procedures.build
   end
 
   def create
-    @procedure = current_user.procedures.build(procedure_params)
-    @procedure.team_id = current_user.team_id
+    @procedure = current_member.procedures.build(procedure_params)
+    @procedure.team_id = current_member.team_id
+
     if @procedure.save
       redirect_to users_procedure_path(@procedure), notice: 'Procedure was successfully created.'
     else
@@ -41,7 +43,7 @@ class ProceduresController < ApplicationController
   private
 
   def set_procedure
-    @procedure = current_user.procedures.find(params[:id])
+    @procedure = current_member.procedures.find(params[:id])
   end
 
   def procedure_params

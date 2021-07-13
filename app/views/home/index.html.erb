@@ -1,10 +1,38 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<i class="fa fa-address-book"></i>
-<% if user_signed_in? %>
-  <p><strong>first name:</strong> <%= current_user.first_name %></p>
-  <p><strong>last name:</strong> <%= current_user.last_name %></p>
-  <p><strong>email:</strong> <%= current_user.email %></p>
-  <p><strong>team:</strong> <%= current_user.team.name %></p>
-  <p><strong>Number of procedures:</strong> <%= current_user.procedures.count %></p>
+<% if member_signed_in? %>
+  <h1>Home member index</h1>
+  <i class="fa fa-address-book"></i>
+
+  <p><strong>first name:</strong> <%= current_member.first_name %></p>
+  <p><strong>last name:</strong> <%= current_member.last_name %></p>
+  <p><strong>email:</strong> <%= current_member.email %></p>
+  <p><strong>team:</strong> <%= current_member.team.name %></p>
+  <p><strong>user type:</strong> <%= current_member.type %></p>
+  <p><strong>Number of procedures:</strong> <%= current_member.procedures.count %></p>
+<% end %>
+
+<% if admin_signed_in? %>
+  <h1>Home admin index</h1>
+  <i class="fa fa-address-book"></i>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            Number of members: <%= User.where(team: current_admin.team).count %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            Pending procedure approval: 20
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <p><strong>first name:</strong> <%= current_admin.first_name %></p>
+  <p><strong>last name:</strong> <%= current_admin.last_name %></p>
+  <p><strong>team:</strong> <%= current_admin.team.name %></p>  
 <% end %>

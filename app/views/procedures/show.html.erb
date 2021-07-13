@@ -10,10 +10,11 @@
 
 <p>
   <strong>User:</strong>
+  <%= @procedure.user.first_name %>
   <%= @procedure.user_id %>
 </p>
 
-<% if current_user.id == @procedure.user_id %>
+<% if current_member.id == @procedure.user_id %>
   <%= link_to 'Edit', edit_users_procedure_path %> | <%= link_to 'Delete', users_procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 
