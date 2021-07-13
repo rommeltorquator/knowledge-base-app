@@ -20,6 +20,7 @@ gem 'devise'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.7'
 gem 'popper_js', '~> 2.9.2'
 gem 'ransack', '~> 2.4', '>= 2.4.2'
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -42,5 +43,3 @@ group :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
-
-gem 'image_processing', '~> 1.12', '>= 1.12.1'
