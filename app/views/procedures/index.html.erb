@@ -8,6 +8,7 @@
       <th>Title</th>
       <th>Author</th>
       <th>Team</th>
+      <th>Status</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -15,15 +16,16 @@
   <tbody>
     <% @posts.each do |procedure| %>
       <tr>
-        <td><%= link_to procedure.title, users_procedure_path(procedure) %></td>
+        <td><%= link_to procedure.title, procedure_path(procedure) %></td>
         <td><%= procedure.user.first_name %></td>
         <td><%= procedure.team.name %></td>
+        <td><%= procedure.approved %></td>
 
         <% if member_signed_in? %>
           <% if current_member.id == procedure.user.id %>
-            <td><%= link_to 'Edit', edit_users_procedure_path(procedure) %></td>
+            <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
             <td>
-              <%= link_to 'Delete', users_procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           <% else %>
             <td></td>
@@ -32,9 +34,9 @@
         <% end %>
 
         <% if admin_signed_in? %>
-          <td><%= link_to 'Edit', edit_users_procedure_path(procedure) %></td>
+          <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
           <td>
-            <%= link_to 'Delete', users_procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>
         <% end %>
       </tr>
@@ -44,4 +46,4 @@
 
 <br>
 
-<%= link_to 'New Procedure', new_users_procedure_path %>
+<%= link_to 'New Procedure', new_procedure_path %>
