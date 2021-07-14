@@ -7,7 +7,7 @@
   <p><strong>email:</strong> <%= current_member.email %></p>
   <p><strong>team:</strong> <%= current_member.team.name %></p>
   <p><strong>user type:</strong> <%= current_member.type %></p>
-  <p><strong>Number of procedures:</strong> <%= current_member.procedures.count %></p>
+  <p><strong>Number of approved procedures:</strong> <%= current_member.procedures.where(approved: true).count %></p>
 <% end %>
 
 <% if admin_signed_in? %>
@@ -16,23 +16,39 @@
   
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="card">
           <div class="card-body">
             Number of members: <%= User.where(team: current_admin.team).count %>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            Pending procedure approval: 20
+            total procedures: <%= Procedure.where(team: current_admin.team).where(approved: true).count %>
+          </div>
+        </div>        
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            number of approved procedures: <%= Procedure.where(team: current_admin.team).where(approved: true).count %>
+          </div>
+        </div>        
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            Pending procedure approval: <%= Procedure.where(team: current_admin.team).where(approved: false).count %>
           </div>
         </div>        
       </div>
     </div>
   </div>
+  <br/>
   <p><strong>first name:</strong> <%= current_admin.first_name %></p>
   <p><strong>last name:</strong> <%= current_admin.last_name %></p>
   <p><strong>team:</strong> <%= current_admin.team.name %></p>  
+  <p><strong>user type:</strong> <%= current_admin.type %></p>  
 <% end %>

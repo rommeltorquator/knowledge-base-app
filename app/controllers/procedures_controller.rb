@@ -1,8 +1,8 @@
 class ProceduresController < ApplicationController
-  before_action :set_procedure, only: %i[edit update destroy]
+  before_action :set_procedure, only: %i[edit update destroy approve]
 
   def index
-    @q = Procedure.where(team_id: current_member.team.id).order(id: :desc).ransack(params[:q]) if member_signed_in?
+    @q = Procedure.where(team_id: current_member.team.id).where(approved: true).order(id: :desc).ransack(params[:q]) if member_signed_in?
     @q = Procedure.where(team_id: current_admin.team.id).order(id: :desc).ransack(params[:q]) if admin_signed_in?
 
     @posts = @q.result(distinct: true)
@@ -20,14 +20,15 @@ class ProceduresController < ApplicationController
   def create
     if member_signed_in?
       @procedure = current_member.procedures.build(procedure_params)
+      @procedure.team_id = current_member.team_id
     elsif admin_signed_in?
       @procedure = current_admin.procedures.build(procedure_params)
+      @procedure.approved = true
+      @procedure.team_id = current_admin.team_id
     end
 
-    @procedure.team_id = current_member.team_id
-
     if @procedure.save
-      redirect_to users_procedure_path(@procedure), notice: 'Procedure was successfully created.'
+      redirect_to procedure_path(@procedure), notice: 'Procedure was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +38,7 @@ class ProceduresController < ApplicationController
 
   def update
     if @procedure.update(procedure_params)
-      redirect_to users_procedure_path(@procedure), notice: 'Procedure was successfully updated.'
+      redirect_to procedure_path(@procedure), notice: 'Procedure was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,7 +46,12 @@ class ProceduresController < ApplicationController
 
   def destroy
     @procedure.destroy
-    redirect_to users_procedures_path, notice: 'Procedure was successfully destroyed.'
+    redirect_to procedures_path, notice: 'Procedure was successfully destroyed.'
+  end
+
+  def approve
+    @procedure.approved = true
+    redirect_to root_path, notice: "Procedure has been successfully updated. #{params[:id]}" if @procedure.save
   end
 
   private

@@ -16,12 +16,24 @@
 
 <% if member_signed_in? %>
   <% if current_member.id == @procedure.user_id %>
-    <%= link_to 'Edit', edit_users_procedure_path %> | <%= link_to 'Delete', users_procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
   <% end %>
 <% end %>
 
 <% if admin_signed_in? %>
-  <%= link_to 'Edit', edit_users_procedure_path %> | <%= link_to 'Delete', users_procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <% if !@procedure.approved? %>
+    <%= link_to 'Approve', approve_procedure_path(@procedure), method: :patch %>
+  <% end %>
 <% end %>
 
-<%= link_to 'Back', users_procedures_path %>
+<br/>
+<br/>
+<br/>
+<br/>
+<%= link_to 'Back', procedures_path %>
