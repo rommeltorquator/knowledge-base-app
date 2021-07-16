@@ -1,3 +1,7 @@
+<% content_for :title do %>
+  Edit <%= @procedure.title %>
+<% end %>
+
 <h1>Editing Procedure</h1>
 
 <%= render 'form_edit', procedure: @procedure %>

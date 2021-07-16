@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <%= link_to  "Home", root_path, class: "navbar-brand" %>
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,30 +10,68 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if member_signed_in? %>
           <li class="nav-item">
-            <%= link_to  "Procedures", procedures_path, class: "nav-link" %>
+            <% if current_page?(home_dashboard_path) %>
+              <%= link_to  "Dashboard", home_dashboard_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "Dashboard", home_dashboard_path, class: "nav-link" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <% if current_page?(procedures_path) %>
+              <%= link_to  "Procedures", procedures_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "Procedures", procedures_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
             <%= link_to  "MEMBER Sign out", destroy_member_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% elsif admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to  "Procedures", procedures_path, class: "nav-link" %>
+            <% if current_page?(home_dashboard_path) %>
+              <%= link_to  "Dashboard", home_dashboard_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "Dashboard", home_dashboard_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to  "New member", account_new_path, class: "nav-link" %>
+            <% if current_page?(procedures_path) %>
+              <%= link_to  "Procedures", procedures_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "Procedures", procedures_path, class: "nav-link" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <% if current_page?(account_new_path) %>
+              <%= link_to  "New member", account_new_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "New member", account_new_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
             <%= link_to  "ADMIN SIGN OUT", destroy_admin_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to  "MEMBER Sign up", new_member_registration_path, class: "nav-link" %>
+            <% if current_page?(new_member_registration_path) %>
+              <%= link_to  "MEMBER Sign up", new_member_registration_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "MEMBER Sign up", new_member_registration_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to  "MEMBER Sign in", new_member_session_path, class: "nav-link" %>
+            <% if current_page?(new_member_session_path) %>
+              <%= link_to  "MEMBER Sign in", new_member_session_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "MEMBER Sign in", new_member_session_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to  "ADMIN Sign in", new_admin_session_path, class: "nav-link" %>
+            <% if current_page?(new_admin_session_path) %>
+              <%= link_to  "ADMIN Sign in", new_admin_session_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "ADMIN Sign in", new_admin_session_path, class: "nav-link" %>
+            <% end %>
           </li>
         <% end %>
       </ul>
