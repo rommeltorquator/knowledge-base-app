@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'account/new'
   post 'account/create'
 
+  get 'home/dashboard'
+
   devise_for :admins
   devise_for :members
   
