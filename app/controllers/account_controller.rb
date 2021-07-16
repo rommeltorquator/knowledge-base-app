@@ -6,14 +6,15 @@ class AccountController < ApplicationController
   def create
     # @new_user = User.new(email: params[:user][:email], first_name: params[:user][:first_name], last_name: params[:user][:last_name], type: params[:user][:type], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
 
-    @new_user = User.new(
-      email: params[:user][:email],
-      first_name: params[:user][:first_name],
-      last_name: params[:user][:last_name],
-      password: params[:user][:password],
-      password_confirmation: params[:user][:password_confirmation]
-    )
+    # @new_user = User.new(
+    #   email: params[:user][:email],
+    #   first_name: params[:user][:first_name],
+    #   last_name: params[:user][:last_name],
+    #   password: params[:user][:password],
+    #   password_confirmation: params[:user][:password_confirmation]
+    # )
 
+    @new_user = User.new(user_params)
     @new_user.type = 'Member'
     @new_user.team_id = current_admin.team_id
 
@@ -23,5 +24,9 @@ class AccountController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
   end
 end
