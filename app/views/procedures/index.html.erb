@@ -1,12 +1,15 @@
 <h1>All Procedures by a team</h1>
 
-<%= render 'search_form.html.erb' %>
+<div class="d-flex align-items-center justify-content-between">
+  <%= render 'search_form.html.erb' %>
+  <%= link_to '+ New Procedure', new_procedure_path %>
+</div>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Author</th>
+      <th><%= sort_link(@q, :title, "Title", default_order: :asc) %></th>
+      <th><%= sort_link(@q, :user, "Author", default_order: :asc) %></th>
       <th>Team</th>
       <th>Status</th>
       <th colspan="2"></th>
@@ -45,5 +48,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Procedure', new_procedure_path %>

@@ -4,11 +4,6 @@
 <br/>
 
 <%= form_with model: @new_user, url: account_create_path, method: "post", local: true do |f| %>
-  <% if @new_user.errors.any? %>
-    <p><%= @new_user.errors.inspect %></p>
-    <p><%= @new_user.errors.messages[:email].any? %></p>
-  <% end %>
-
   <div class="input-group mb-3">
     <% if @new_user.errors.messages[:email].any? %>
       <p class="text-danger">
