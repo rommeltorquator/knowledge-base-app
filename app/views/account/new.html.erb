@@ -1,0 +1,65 @@
+<h1>Member new for team <%= current_admin.team.name %></h1>
+<br/>
+<br/>
+<br/>
+
+<%= form_with model: @new_user, url: account_create_path, method: "post", local: true do |f| %>
+  <% if @new_user.errors.any? %>
+    <p><%= @new_user.errors.inspect %></p>
+    <p><%= @new_user.errors.messages[:email].any? %></p>
+  <% end %>
+
+  <div class="input-group mb-3">
+    <% if @new_user.errors.messages[:email].any? %>
+      <p class="text-danger">
+        Email <%= @new_user.errors.messages[:email].to_sentence %>
+      </p>
+    <% end %>
+
+    <%= f.label :email, class:"input-group-text" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+  </div>
+
+  <div class="input-group mb-3">
+    <% if @new_user.errors.messages[:first_name].any? %>
+      <p class="text-danger">
+        First name <%= @new_user.errors.messages[:first_name].to_sentence %>
+      </p>
+    <% end %>
+
+    <%= f.label :first_name, class:"input-group-text" %><br />
+    <%= f.text_field :first_name, value: "", class: "form-control" %>
+  </div>
+
+  <div class="input-group mb-3">
+    <% if @new_user.errors.messages[:last_name].any? %>
+      <p class="text-danger">
+        Last name <%= @new_user.errors.messages[:last_name].to_sentence %>
+      </p>
+    <% end %>
+
+    <%= f.label :last_name, class:"input-group-text" %><br />
+    <%= f.text_field :last_name, value: "", class: "form-control" %>
+  </div>
+
+  <% if @new_user.errors.messages[:password_confirmation].any? %>
+    <p class="text-danger">
+      Password confirmation <%= @new_user.errors.messages[:password_confirmation].to_sentence %>
+    </p>
+  <% end %>
+
+  <div class="input-group mb-3">
+    <%= f.label :password, class:"input-group-text" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+  </div>
+
+  <div class="input-group mb-3">
+    <%= f.label :password_confirmation, class:"input-group-text" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+  </div>
+
+  <br/>
+  <div class="actions">
+    <%= f.submit "Create User", class: "btn btn-danger btn-block" %>
+  </div>
+<% end %>

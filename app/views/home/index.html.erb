@@ -26,7 +26,7 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            total procedures: <%= Procedure.where(team: current_admin.team).where(approved: true).count %>
+            total procedures: <%= Procedure.where(team: current_admin.team).count %>
           </div>
         </div>        
       </div>

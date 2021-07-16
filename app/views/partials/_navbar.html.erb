@@ -20,6 +20,9 @@
             <%= link_to  "Procedures", procedures_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
+            <%= link_to  "New member", account_new_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
             <%= link_to  "ADMIN SIGN OUT", destroy_admin_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% else %>
