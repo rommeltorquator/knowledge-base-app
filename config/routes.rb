@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'account/new'
+  post 'account/create'
+
   devise_for :admins
   devise_for :members
   
