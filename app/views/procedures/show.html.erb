@@ -46,13 +46,13 @@
       <%= link_to 'Back', procedures_path %>
     </div>
 
-    <div class="col-md-4 bg-success">      
+    <div class="col-md-4">      
       <div>
-        <h1>Related videos</h1>
+        <h1 class="text-center">Related videos</h1>
         <% @videos["items"].each do |video| %>
           <p><%#= video["id"]["videoId"] %></p>
           <iframe id="iframe" 
-                  style="width:100%;height:100%"
+                  style="width:100%;"
                   src=
   "https://www.youtube.com/embed/<%= video["id"]["videoId"] %>"
                   data-autoplay-src="
@@ -63,4 +63,3 @@
     </div>
   </div>
 </div>
-
