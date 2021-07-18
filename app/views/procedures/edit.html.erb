@@ -2,9 +2,6 @@
   Edit <%= @procedure.title %>
 <% end %>
 
-<h1>Editing Procedure</h1>
+<h1 class="text-center my-4">Editing Procedure</h1>
 
 <%= render 'form_edit', procedure: @procedure %>
-
-<%= link_to 'Show', procedure_path(@procedure) %>
-<%= link_to 'Back', procedures_path %>

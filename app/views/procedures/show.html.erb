@@ -3,52 +3,36 @@
 <% end %>
 
 <div class="container">
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-md-8">
-      <p>
-        <strong>Title:</strong>
-        <%= @procedure.title %>
-      </p>
+      <h2 class="text-center"><%= @procedure.title %></h2>
+      <p>By <strong><%= @procedure.user.first_name %> <%= @procedure.user.last_name %></strong></p>
+      <p>Created at <strong><%= @procedure.created_at %></strong></p>
 
-      <p>
-        <strong>Body:</strong>
-        <%= @procedure.body %>
-      </p>
+      <div class="card">
+        <div class="card-body">
+          <p><%= @procedure.body %></p>
 
-      <p>
-        <strong>User:</strong>
-        <%= @procedure.user.first_name %>
-        <%= @procedure.user_id %>
-      </p>
+          <% if member_signed_in? %>
+            <% if current_member.id == @procedure.user_id %>
+              <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Back', procedures_path %>
+            <% end %>
+          <% end %>
 
-      <% if member_signed_in? %>
-        <% if current_member.id == @procedure.user_id %>
-          <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
-        <% end %>
-      <% end %>
+          <% if admin_signed_in? %>
+            <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Back', procedures_path %>
 
-      <% if admin_signed_in? %>
-        <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> |
-
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <% if !@procedure.approved? %>
-          <%= link_to 'Approve', approve_procedure_path(@procedure), method: :patch %>
-        <% end %>
-      <% end %>
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <%= link_to 'Back', procedures_path %>
+            <% if !@procedure.approved? %>
+              <%= link_to 'Approve', approve_procedure_path(@procedure), method: :patch %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <div class="col-md-4">      
       <div>
-        <h1 class="text-center">Related videos</h1>
+        <h2 class="text-center">Related videos</h2>
         <% @videos["items"].each do |video| %>
           <p><%#= video["id"]["videoId"] %></p>
           <iframe id="iframe" 

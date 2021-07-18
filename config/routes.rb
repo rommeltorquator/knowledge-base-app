@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   get 'home/dashboard'
 
-  devise_for :admins
-  devise_for :members
+  devise_for :admins, controllers: { confirmations: 'confirmations' }
+  devise_for :members, controllers: { confirmations: 'confirmations' }
   
   root 'home#index'
   resource :users
