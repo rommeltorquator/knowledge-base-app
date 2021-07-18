@@ -1,0 +1,9 @@
+<h1 class="mt-4">Welcome, <%= current_member.first_name %></h1>
+<!-- <i class="fa fa-address-book"></i> -->
+
+<p><strong>First name:</strong> <%= current_member.first_name %></p>
+<p><strong>Last name:</strong> <%= current_member.last_name %></p>
+<p><strong>Email:</strong> <%= current_member.email %></p>
+<p><strong>Team:</strong> <%= current_member.team.name %></p>
+<p><strong>User type:</strong> <%= current_member.type %></p>
+<p><strong>Number of approved procedures:</strong> <%= current_member.procedures.where(approved: true).count %></p>

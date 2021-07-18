@@ -2,53 +2,61 @@
   All procedures
 <% end %>
 
-<h1>All Procedures by a team</h1>
+<h1 class="text-center my-4">All Procedures</h1>
 
-<div class="d-flex align-items-center justify-content-between">
-  <%= render 'search_form.html.erb' %>
-  <%= link_to '+ New Procedure', new_procedure_path %>
+<div class="container">
+  <div class="row">
+    <div class="d-flex align-items-center justify-content-between">
+      <%= render 'search_form.html.erb' %>
+      <%= link_to '+ New Procedure', new_procedure_path %>
+    </div>
+    <div class="col-md-12 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">All procedures</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th><%= sort_link(@q, :title, "Title", default_order: :asc) %></th>
+                <th><%= sort_link(@q, :user, "Author", default_order: :asc) %></th>
+                <th>Team</th>
+                <th>Approved?</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @posts.each do |procedure| %>
+                <tr>
+                  <td><%= link_to procedure.title, procedure_path(procedure) %></td>
+                  <td><%= procedure.user.first_name %></td>
+                  <td><%= procedure.team.name %></td>
+                  <td><%= procedure.approved %></td>
+
+                  <% if member_signed_in? %>
+                    <% if current_member.id == procedure.user.id %>
+                      <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
+                      <td>
+                        <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+                      </td>
+                    <% else %>
+                      <td></td>
+                      <td></td>
+                    <% end %>
+                  <% end %>
+
+                  <% if admin_signed_in? %>
+                    <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
+                    <td>
+                      <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= sort_link(@q, :title, "Title", default_order: :asc) %></th>
-      <th><%= sort_link(@q, :user, "Author", default_order: :asc) %></th>
-      <th>Team</th>
-      <th>Status</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |procedure| %>
-      <tr>
-        <td><%= link_to procedure.title, procedure_path(procedure) %></td>
-        <td><%= procedure.user.first_name %></td>
-        <td><%= procedure.team.name %></td>
-        <td><%= procedure.approved %></td>
-
-        <% if member_signed_in? %>
-          <% if current_member.id == procedure.user.id %>
-            <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
-            <td>
-              <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-          <% else %>
-            <td></td>
-            <td></td>
-          <% end %>
-        <% end %>
-
-        <% if admin_signed_in? %>
-          <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
-          <td>
-            <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>

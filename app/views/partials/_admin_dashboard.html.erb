@@ -1,0 +1,74 @@
+<h1 class="mt-4">Welcome, <%= current_admin.first_name %></h1>
+<p><strong>First name:</strong> <%= current_admin.first_name %></p>
+<p><strong>Last name:</strong> <%= current_admin.last_name %></p>
+<p><strong>Team:</strong> <%= current_admin.team.name %></p>
+<p><strong>Number of procedures:</strong> <%= current_admin.procedures.count %></p>
+<p><strong>User type:</strong> <%= current_admin.type %></p>
+<!-- <i class="fa fa-address-book"></i> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="text-center">Number of members:</h5>
+          <p class="text-center"><%= User.where(team: current_admin.team).count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="text-center">Total procedures:</h5>
+          <p class="text-center"><%= Procedure.where(team: current_admin.team).count %></p>
+        </div>
+      </div>        
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="text-center">Number of approved procedures:</h5>
+          <p class="text-center"><%= Procedure.where(team: current_admin.team).where(approved: true).count %></p>
+        </div>
+      </div>        
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="text-center">Pending procedure approval:</h5>
+          <p class="text-center"><%= Procedure.where(team: current_admin.team).where(approved: false).count %></p>
+        </div>
+      </div>        
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Team members</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">email</th>
+                <th scope="col"># of approved procedures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% User.where(team_id: current_admin.team_id).each do |user| %>
+                <tr>
+                  <th scope="row"><%= user.id %></th>
+                  <td><%= user.first_name %></td>
+                  <td><%= user.last_name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.procedures.count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end row -->
+</div> <!-- end container -->

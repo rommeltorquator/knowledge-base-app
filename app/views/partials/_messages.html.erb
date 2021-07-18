@@ -1,13 +1,15 @@
 <div class="container">
   <% if notice %>
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
       <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
 
   <% if alert %>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
       <%= alert %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
 </div>
