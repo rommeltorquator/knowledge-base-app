@@ -24,7 +24,7 @@ gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 gem 'rest-client', '~> 2.1'
 gem 'json', '~> 2.5', '>= 2.5.1'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
-gem "letter_opener", group: :development
+# gem "letter_opener", group: :development
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

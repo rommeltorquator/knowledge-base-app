@@ -10,7 +10,7 @@ class ProcedureMailer < ApplicationMailer
     @admin = params[:admin]
 
     mail(
-      from: 'KB.com',
+      # from: ENV['EMAIL'],
       to: @email,
       # cc: User.all.pluck(:email),
       # bcc: secret@gmail.com,

@@ -1,16 +1,16 @@
 Rails.application.configure do
   # added by me
-  config.action_mailer.default_url_options = { host: 'https://rommel-kb.herokuapp.com/', protocol: 'https' }
-
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'https://rommel-kb.herokuapp.com/',
-    user_name:            ENV['EMAIL'],
-    password:             ENV['GMAIL_PASSWORD'],
-    authentication:       'plain',
-    enable_starttls_auto: true }
+  # config.action_mailer.default_url_options = { host: 'https://rommel-kb.herokuapp.com/', protocol: 'https' }
+  
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'https://rommel-kb.herokuapp.com/',
+  #   user_name:            ENV['EMAIL'],
+  #   password:             ENV['GMAIL_PASSWORD'],
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true }
 
   # Settings specified here will take precedence over those in config/application.rb.
 

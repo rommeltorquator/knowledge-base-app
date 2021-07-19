@@ -1,4 +1,8 @@
-<h2 class="text-center my-4">Log in</h2>
+<% if current_page?(new_member_session_path) %>
+  <h2 class="text-center my-4">Member log in</h2>
+<% elsif current_page?(new_admin_session_path) %>
+  <h2 class="text-center my-4">Admin log in</h2>
+<% end %>
 
 <div class="container">
   <div class="row">
