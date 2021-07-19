@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_inactive_sign_up_path_for(_resource)
-    flash[:notice] = "Account has been successfully created."
+    flash[:notice] = 'Account has been successfully created.'
     home_dashboard_path
   end
 end
