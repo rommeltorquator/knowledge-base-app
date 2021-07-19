@@ -1,17 +1,16 @@
 Rails.application.configure do
+  # added by me
+  config.action_mailer.default_url_options = { host: 'https://rommel-kb.herokuapp.com/', protocol: 'https' }
+
   config.action_mailer.delivery_method = :smtp
-  host = 'example.com' #replace with your own url
-  config.action_mailer.default_url_options = { host: host }
-  
-  # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => <gmail_username>,
-    :password             => <gmail_password>,
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'https://rommel-kb.herokuapp.com/',
+    user_name:            ENV['EMAIL'],
+    password:             ENV['GMAIL_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto: true }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -78,7 +77,7 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.raise_delivery_errors = true # edited by me
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
