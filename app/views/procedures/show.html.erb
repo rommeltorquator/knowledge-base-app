@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row mt-4">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <h2 class="text-center"><%= @procedure.title %></h2>
       <p>By <strong><%= @procedure.user.first_name %> <%= @procedure.user.last_name %></strong></p>
       <p>Created at <strong><%= @procedure.created_at %></strong></p>
@@ -23,27 +23,18 @@
             <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Back', procedures_path %>
 
             <% if !@procedure.approved? %>
-              <%= link_to 'Approve', approve_procedure_path(@procedure), method: :patch %>
+              | <%= link_to 'Approve', approve_procedure_path(@procedure), method: :patch %>
             <% end %>
           <% end %>
         </div>
       </div>
     </div>
 
-    <div class="col-md-4">      
-      <div>
-        <h2 class="text-center">Related videos</h2>
-        <% @videos["items"].each do |video| %>
-          <p><%#= video["id"]["videoId"] %></p>
-          <iframe id="iframe" 
-                  style="width:100%;"
-                  src=
-  "https://www.youtube.com/embed/<%= video["id"]["videoId"] %>"
-                  data-autoplay-src="
-  https://www.youtube.com/embed/<%= video["id"]["videoId"] %>?autoplay=1">
-              </iframe>
-        <% end %>
+    <h2 class="text-center my-4">Related videos</h2>
+    <% @videos["items"].each do |video| %>
+      <div class="col-md-4 mb-2">
+        <iframe width="100%" height="300px" src="https://www.youtube.com/embed/<%= video["id"]["videoId"] %>?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1" frameborder="0" allowfullscreen></iframe>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

@@ -10,10 +10,10 @@ class ProceduresController < ApplicationController
   def show
     @procedure = Procedure.friendly.find(params[:id])
 
-    # BASE_URL = "https://www.googleapis.com/youtube/v3"
-    response = RestClient.get("https://youtube.googleapis.com/youtube/v3/search?maxResults=3&q=#{@procedure.title}&key=#{ENV['KEY']}")
+    base_url = 'https://www.googleapis.com/youtube/v3/'
+    max_results = 3
+    response = RestClient.get("#{base_url}search?maxResults=#{max_results}&q=#{@procedure.title}&key=#{ENV['KEY']}")
     @videos = JSON.parse(response)
-    # byebug
   end
 
   def new
@@ -54,6 +54,7 @@ class ProceduresController < ApplicationController
 
   def approve
     @procedure.approved = true
+    ProcedureMailer.with(email: @procedure.user.email, procedure: @procedure, admin: current_admin).approved_procedure.deliver_now
     redirect_to root_path, notice: "Procedure has been successfully updated. #{params[:id]}" if @procedure.save
   end
 

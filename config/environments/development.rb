@@ -1,4 +1,6 @@
 Rails.application.configure do
+  # added by me
+  
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   # Settings specified here will take precedence over those in config/application.rb.
