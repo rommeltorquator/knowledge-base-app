@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_18_104947) do
+ActiveRecord::Schema.define(version: 2021_07_20_113643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2021_07_18_104947) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "newsfeeds", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team_id", null: false
+    t.index ["team_id"], name: "index_newsfeeds_on_team_id"
+    t.index ["user_id"], name: "index_newsfeeds_on_user_id"
+  end
+
   create_table "procedures", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -105,6 +115,8 @@ ActiveRecord::Schema.define(version: 2021_07_18_104947) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "newsfeeds", "teams"
+  add_foreign_key "newsfeeds", "users"
   add_foreign_key "procedures", "teams"
   add_foreign_key "procedures", "users"
   add_foreign_key "users", "teams"

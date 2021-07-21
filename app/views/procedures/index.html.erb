@@ -19,9 +19,10 @@
               <tr>
                 <th><%= sort_link(@q, :title, "Title", default_order: :asc) %></th>
                 <th><%= sort_link(@q, :user, "Author", default_order: :asc) %></th>
+                <th>Email</th>
                 <th>Team</th>
                 <th>Approved?</th>
-                <th colspan="2"></th>
+                <th colspan="3"></th>
               </tr>
             </thead>
 
@@ -30,6 +31,7 @@
                 <tr>
                   <td><%= link_to procedure.title, procedure_path(procedure) %></td>
                   <td><%= procedure.user.first_name %></td>
+                  <td><%= procedure.user.email %></td>
                   <td><%= procedure.team.name %></td>
                   <td><%= procedure.approved %></td>
 

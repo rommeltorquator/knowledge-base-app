@@ -17,6 +17,13 @@
             <% end %>
           </li>
           <li class="nav-item">
+            <% if current_page?(news_index_path) %>
+              <%= link_to  "Newsfeed", news_index_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "Newsfeed", news_index_path, class: "nav-link" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
             <% if current_page?(procedures_path) %>
               <%= link_to  "Procedures", procedures_path, class: "nav-link active" %>
             <% else %>
@@ -46,6 +53,13 @@
               <%= link_to  "Dashboard", home_dashboard_path, class: "nav-link active" %>
             <% else %>
               <%= link_to  "Dashboard", home_dashboard_path, class: "nav-link" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <% if current_page?(news_index_path) %>
+              <%= link_to  "Newsfeed", news_index_path, class: "nav-link active" %>
+            <% else %>
+              <%= link_to  "Newsfeed", news_index_path, class: "nav-link" %>
             <% end %>
           </li>
           <li class="nav-item">
