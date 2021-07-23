@@ -58,7 +58,7 @@ class ProceduresController < ApplicationController
 
     ProcedureMailer.with(email: User.where(team_id: current_admin.team_id).where.not(email: @procedure.user.email), procedure: @procedure, admin: current_admin).new_procedure.deliver_now
 
-    redirect_to root_path, notice: "Procedure has been successfully updated. #{params[:id]}" if @procedure.save
+    redirect_to procedures_path, notice: "Procedure has been successfully updated. #{params[:id]}" if @procedure.save
   end
 
   private
