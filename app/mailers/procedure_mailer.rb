@@ -27,7 +27,7 @@ class ProcedureMailer < ApplicationMailer
     mail(
       # from: ENV['EMAIL'],
       # User.where(team_id: 1).collect(&:email).join(",")
-      to: mails,
+      bcc: mails,
       # cc: User.all.pluck(:email),
       # bcc: secret@gmail.com,
       subject: "A new procedure entitled, #{@procedure.title} has been newly added."

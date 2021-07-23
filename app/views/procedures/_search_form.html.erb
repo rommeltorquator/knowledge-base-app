@@ -1,11 +1,6 @@
 <%= search_form_for @q, url: procedures_path do |f| %>
-  <%#= f.label :title_cont %>
-  <%#= f.search_field :title_cont %>
-
-  <%#= f.label :body_cont %>
-  <%#= f.search_field :body_cont %>
-
-  <%= f.search_field :title_or_body_cont, placeholder: "Procedure" %>
-
-  <%= f.submit "Search" %>
+  <div class="d-flex align-items-center justify-content-between">
+    <%= f.search_field :title_or_body_cont, placeholder: "Procedure", class: "form-search" %> &nbsp;
+    <%= f.submit "Search", class: "btn btn-success" %>
+  </div>
 <% end %>

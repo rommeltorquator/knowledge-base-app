@@ -2,34 +2,40 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="offset-md-2 col-md-8">
       <div class="card">
         <div class="card-body">
           <h4>What's on your mind?</h4>
+          <br/>
           <%= form_with(model: @news, local: true, url: news_create_path) do |form| %>
             <div class="mb-2">
-              <%= form.text_area :body, class: "form-control" %>
+              <%= form.text_area :body, class: "form-control", rows: 5 %>
             </div>
-            <%= form.submit class: "btn btn-success" %>
+            <%= form.submit "Submit", class: "btn btn-outline-success newsfeed-btn" %>
           <% end %>
         </div>
       </div>
     </div> <!-- col-md-8 -->
 
-    <% @team_news.each do |news| %>
-      <div class="col-md-8 mt-2">
+    <% @team_news.order(id: :desc).each do |news| %>
+      <div class="offset-md-2 col-md-8 mt-2">
         <div class="card">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between">
-              <h6><%= news.user.first_name %> <%= news.user.last_name %></h6>
+              <h6><%= news.user.first_name %> <%= news.user.last_name %> <span class="time-p"><%= news.created_at.strftime("%b %d, %Y") %></span></h6>
               <% if current_member %>
                 <% if news.user_id == current_member.id %>
                   <%= link_to "Delete", delete_news_path(news), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure?' } %>
                 <% end %>
               <% end %>
+              <% if current_admin %>
+                <% if news.user_id == current_admin.id %>
+                  <%= link_to "Delete", delete_news_path(news), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure?' } %>
+                <% end %>
+              <% end %>
             </div>
             <hr/>
-            <p><%= news.body %></p>
+            <p class="news-p"><%= news.body %></p>
           </div>
         </div>
       </div>
