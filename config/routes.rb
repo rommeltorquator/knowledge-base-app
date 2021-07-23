@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'news/index'
+  post 'news/create'
+  delete 'news/:id', to: 'news#destroy', as: 'delete_news'
+
+  # resources :newsfeed
+  
   get 'account/new'
   post 'account/create'
 

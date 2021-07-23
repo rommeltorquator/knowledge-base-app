@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :procedures, dependent: :nullify
+  has_many :newsfeeds, dependent: :nullify
   belongs_to :team
 
   validates :email, :first_name, :last_name, :type, presence: true

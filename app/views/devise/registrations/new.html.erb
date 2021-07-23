@@ -27,12 +27,14 @@
               <%= f.text_field :last_name, autofocus: true, autocomplete: "first name", class: "form-control" %>
             </div>
 
-            <% if current_page?(new_member_registration_path) %>
+            <% if current_page?(new_member_registration_path) && admin_signed_in? %>
               <%= f.hidden_field :team_id, value: current_admin.team_id %>
             <% else %>
               <div class="mb-2">
                 <label>Team</label>
-                <%= f.collection_select :team_id, Team.all, :id, :name, include_blank: true, :class =>"form-select" %>
+                <%#= f.collection_select(:team_id, Team.all, :id, :name, include_blank: true, { class: "form-select" } %>
+
+                <%= f.collection_select :team_id, Team.all, :id, :name, { include_blank: true }, { class: "form-select" } %>
               </div>
             <% end %>
 

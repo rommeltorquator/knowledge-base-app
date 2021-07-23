@@ -2,13 +2,15 @@
   All procedures
 <% end %>
 
-<h1 class="text-center my-4">All Procedures</h1>
+<h1 class="text-center my-4">Procedures</h1>
 
 <div class="container">
   <div class="row">
     <div class="d-flex align-items-center justify-content-between">
       <%= render 'search_form.html.erb' %>
-      <%= link_to '+ New Procedure', new_procedure_path %>
+      <%= link_to new_procedure_path do %>
+        <strong>+ New Procedure</strong>
+      <% end %>
     </div>
     <div class="col-md-12 mt-4">
       <div class="card">
@@ -19,9 +21,8 @@
               <tr>
                 <th><%= sort_link(@q, :title, "Title", default_order: :asc) %></th>
                 <th><%= sort_link(@q, :user, "Author", default_order: :asc) %></th>
-                <th>Team</th>
                 <th>Approved?</th>
-                <th colspan="2"></th>
+                <th colspan="4"></th>
               </tr>
             </thead>
 
@@ -29,8 +30,7 @@
               <% @posts.each do |procedure| %>
                 <tr>
                   <td><%= link_to procedure.title, procedure_path(procedure) %></td>
-                  <td><%= procedure.user.first_name %></td>
-                  <td><%= procedure.team.name %></td>
+                  <td><%= procedure.user.first_name %> <%= procedure.user.last_name %></td>
                   <td><%= procedure.approved %></td>
 
                   <% if member_signed_in? %>
@@ -46,9 +46,9 @@
                   <% end %>
 
                   <% if admin_signed_in? %>
-                    <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
+                    <td><%= link_to 'Edit', edit_procedure_path(procedure), class: "btn btn-outline-dark" %></td>
                     <td>
-                      <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
                     </td>
                   <% end %>
                 </tr>
