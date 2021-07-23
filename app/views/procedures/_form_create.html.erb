@@ -16,7 +16,7 @@
 
         <div class="mb-2">
           <%= form.label :title, class: "form-label" %>
-          <%= form.text_field :title, class: "form-control" %>
+          <%= form.text_field :title, class: "form-control", style: "border: 1px solid #aba48d !important;" %>
         </div>
 
         <div class="mb-2">
@@ -25,10 +25,13 @@
         </div>
 
         <div class="actions">
-          <%= form.submit class: "btn btn-success" %>
+          <%= form.submit class: "btn btn-outline-success" %>
         </div>
       <% end %>
-      <%= link_to 'Back', procedures_path %>
+
+      <%= link_to procedures_path, class: "d-block mt-3" do %>
+        Go back
+      <% end %>
     </div>
   </div>
 </div>

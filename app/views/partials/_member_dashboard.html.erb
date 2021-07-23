@@ -1,24 +1,14 @@
-<h1 class="mt-4">Welcome, <%= current_member.first_name %></h1>
-<!-- <i class="fa fa-address-book"></i> -->
-
-<p><strong>First name:</strong> <%= current_member.first_name %></p>
-<p><strong>Last name:</strong> <%= current_member.last_name %></p>
-<p><strong>Email:</strong> <%= current_member.email %></p>
-<p><strong>Team:</strong> <%= current_member.team.name %></p>
-<p><strong>User type:</strong> <%= current_member.type %></p>
-<p><strong>Number of approved procedures:</strong> <%= current_member.procedures.where(approved: true).count %></p>
-<p><strong>Number of unapproved procedures:</strong> <%= current_member.procedures.where(approved: false).count %></p>
+<h1 class="my-4 text-center">Welcome, <%= current_member.first_name %></h1>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 mt-4">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Your procedures (<%= Procedure.where(team_id: current_member.team_id).where(user_id: current_member.id).count %>)</h5>
+          <h5 class="card-title"><strong>Your procedures (<%= Procedure.where(team_id: current_member.team_id).where(user_id: current_member.id).count %>)</strong></h5>
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Title</th>
                 <th scope="col">Approved?</th>
                 <th></th>
@@ -28,11 +18,10 @@
             <tbody>
               <% Procedure.where(team_id: current_member.team_id).where(user_id: current_member.id).order(id: :desc).each do |procedure| %>
                 <tr>
-                  <td><%= procedure.id %></td>
-                  <td><%= link_to procedure.title, procedure_path(procedure) %></td>
-                  <td><%= procedure.approved %></td>
-                  <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
-                  <td><%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= link_to procedure.title, procedure_path(procedure), class: "procedure-list" %></td>
+                  <td><%= procedure.approved.to_s.capitalize %></td>
+                  <td><%= link_to 'Edit', edit_procedure_path(procedure), class: "btn btn-outline-dark" %></td>
+                  <td><%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
                 </tr>
               <% end %>
             </tbody>

@@ -15,13 +15,12 @@
     <div class="col-md-12 mt-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">All procedures</h5>
+          <h5 class="card-title"><strong>All procedures</strong></h5>
           <table class="table">
             <thead>
               <tr>
                 <th><%= sort_link(@q, :title, "Title", default_order: :asc) %></th>
                 <th><%= sort_link(@q, :user, "Author", default_order: :asc) %></th>
-                <th>Approved?</th>
                 <th colspan="4"></th>
               </tr>
             </thead>
@@ -29,17 +28,17 @@
             <tbody>
               <% @posts.each do |procedure| %>
                 <tr>
-                  <td><%= link_to procedure.title, procedure_path(procedure) %></td>
+                  <td><%= link_to procedure.title, procedure_path(procedure), class: "procedure-list" %></td>
                   <td><%= procedure.user.first_name %> <%= procedure.user.last_name %></td>
-                  <td><%= procedure.approved %></td>
 
                   <% if member_signed_in? %>
                     <% if current_member.id == procedure.user.id %>
-                      <td><%= link_to 'Edit', edit_procedure_path(procedure) %></td>
+                      <td><%= link_to 'Edit', edit_procedure_path(procedure), class: "btn btn-outline-dark" %></td>
                       <td>
-                        <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
                       </td>
                     <% else %>
+                      <td></td>
                       <td></td>
                       <td></td>
                     <% end %>
@@ -50,6 +49,12 @@
                     <td>
                       <%= link_to 'Delete', procedure_path(procedure), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
                     </td>
+                    
+                    <% if !procedure.approved? %>
+                      <td><%= link_to 'Approve', approve_procedure_path(procedure), method: :patch, class: "btn btn-outline-success" %></td>
+                    <% else %>
+                      <td>Approved</td>
+                    <% end %>                    
                   <% end %>
                 </tr>
               <% end %>
@@ -60,3 +65,4 @@
     </div>
   </div>
 </div>
+<br/>

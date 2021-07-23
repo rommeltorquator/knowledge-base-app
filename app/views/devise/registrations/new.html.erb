@@ -32,31 +32,19 @@
             <% else %>
               <div class="mb-2">
                 <label>Team</label>
-                <%#= f.collection_select(:team_id, Team.all, :id, :name, include_blank: true, { class: "form-select" } %>
-
                 <%= f.collection_select :team_id, Team.all, :id, :name, { include_blank: true }, { class: "form-select" } %>
               </div>
             <% end %>
 
-            <div class="mb-2">
-              <%= f.label :password, class: "form-label" %>
-              <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %>
-              <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-            </div>
-
-            <div class="mb-2">
-              <%= f.label :password_confirmation, class: "form-label" %>
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-            </div>
+            <%= f.hidden_field :password, value: '123456' %>
+            <%= f.hidden_field :password_confirmation, value: '123456' %>
 
             <div class="actions">
-              <%= f.submit "Sign up", class: "btn btn-success" %>
+              <%= f.submit "Create", class: "btn btn-outline-success" %>
             </div>
           <% end %>
 
-          <%= render "devise/shared/links" %>
+          <%#= render "devise/shared/links" %>
         </div>
       </div>
     </div>

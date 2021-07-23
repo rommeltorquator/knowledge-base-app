@@ -3,14 +3,14 @@
 <% end %>
 
 <div class="container">
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <h2 class="text-center"><%= @procedure.title %></h2>
+  <div class="row">
+    <div class="offset-md-2 col-md-8">
+      <h2 class="text-center my-4"><%= @procedure.title %></h2>
       <p>By <strong><%= @procedure.user.first_name %> <%= @procedure.user.last_name %></strong></p>
-      <p>Created at <strong><%= @procedure.created_at %></strong></p>
+      <p>Created at <strong><%= @procedure.created_at.strftime("%b %d, %Y") %></strong></p>
 
-      <div class="card">
-        <div class="card-body">
+      <div class="card mt-4">
+        <div class="card-body p-5">
           <p><%= @procedure.body %></p>
 
           <% if member_signed_in? %>
@@ -21,14 +21,14 @@
 
           <% if admin_signed_in? %>
             <%= link_to 'Edit', edit_procedure_path %> | <%= link_to 'Delete', procedure_path(@procedure), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Back', procedures_path %>
-
             <% if !@procedure.approved? %>
               | <%= link_to 'Approve', approve_procedure_path(@procedure), method: :patch %>
             <% end %>
           <% end %>
+          
         </div>
-      </div>
-    </div>
+      </div> <!-- end card -->
+    </div> <!-- end col -->
 
     <% if member_signed_in? %>
       <h2 class="text-center my-4">Related videos</h2>
@@ -38,5 +38,6 @@
         </div>
       <% end %>
     <% end %>
-  </div>
-</div>
+  </div> <!-- end row -->
+</div> <!-- end container -->
+<br/>

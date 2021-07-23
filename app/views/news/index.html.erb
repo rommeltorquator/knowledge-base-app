@@ -25,12 +25,12 @@
               <h6><%= news.user.first_name %> <%= news.user.last_name %> <span class="time-p"><%= news.created_at.strftime("%b %d, %Y") %></span></h6>
               <% if current_member %>
                 <% if news.user_id == current_member.id %>
-                  <%= link_to "Delete", delete_news_path(news), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure?' } %>
+                  <%= link_to "Delete", delete_news_path(news), method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: 'Are you sure?' } %>
                 <% end %>
               <% end %>
               <% if current_admin %>
                 <% if news.user_id == current_admin.id %>
-                  <%= link_to "Delete", delete_news_path(news), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure?' } %>
+                  <%= link_to "Delete", delete_news_path(news), method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: 'Are you sure?' } %>
                 <% end %>
               <% end %>
             </div>
@@ -42,3 +42,4 @@
     <% end %>
   </div> <!-- end row -->
 </div> <!-- end container -->
+<br/>
